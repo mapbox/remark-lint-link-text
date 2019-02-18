@@ -19,7 +19,7 @@ The linter warns against:
 ## Install
 
 ```
-npm install --save-dev remark-cli remark-lint-link-text
+npm install --save-dev remark-cli @mapbox/remark-lint-link-text
 ```
 
 In `package.json`:
