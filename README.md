@@ -30,7 +30,7 @@ In `package.json`:
 },
 "remarkConfig": {
   "plugins": [
-    remark-lint-link-text
+    "@mapbox/remark-lint-link-text"
   ]
 },
 ```
