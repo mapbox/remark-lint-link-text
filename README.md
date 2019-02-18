@@ -30,6 +30,16 @@ In `package.json`:
 },
 "remarkConfig": {
   "plugins": [
+    ["@mapbox/remark-lint-link-text", [2]]
+  ]
+},
+```
+
+If you do not want the linter to fail, but only give warnings:
+
+```
+"remarkConfig": {
+  "plugins": [
     "@mapbox/remark-lint-link-text"
   ]
 },
