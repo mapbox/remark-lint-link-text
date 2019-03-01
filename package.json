@@ -1,6 +1,6 @@
 {
   "name": "@mapbox/remark-lint-link-text",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "A remark-lint plugin that warns against non-descriptive link text.",
   "main": "index.js",
   "scripts": {
@@ -30,6 +30,10 @@
   "lint-staged": {
     "*.js": [
       "eslint",
+      "prettier --write",
+      "git add"
+    ],
+    "*.json": [
       "prettier --write",
       "git add"
     ]
