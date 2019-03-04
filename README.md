@@ -14,7 +14,12 @@ The linter warns against:
 * read more
 * this link
 * more here
+* this article
+* this [whatever words in between] article
 
+And [several others](banned.json).
+
+💡 For all banned phrases that begin with `this` or `the`, any words that come between will also fail. For example "this post", "this Mapbox post", and "this Mapbox blog post" will all fail.
 
 ## Install
 

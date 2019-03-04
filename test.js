@@ -74,4 +74,37 @@ describe('remark-lint-link-text', () => {
       );
     });
   });
+
+  test('warns against banned link text, regex match', () => {
+    const lint = processMarkdown(
+      dedent`
+      # Title
+
+      A bad link: [this mapbox article](https://docs.mapbox.com).
+      A bad link: [this Mapbox article](https://docs.mapbox.com).
+      A bad link: [this article](https://docs.mapbox.com).
+      A bad link: [this blog post](https://docs.mapbox.com).
+      A bad link: [the Mapbox blog post](https://docs.mapbox.com).
+    `
+    );
+
+    return lint.then(vFile => {
+      expect(vFile.messages.length).toBe(5);
+      expect(vFile.messages[0].reason).toBe(
+        'Replace "this mapbox article" with descriptive link text that details the destination.'
+      );
+      expect(vFile.messages[1].reason).toBe(
+        'Replace "this Mapbox article" with descriptive link text that details the destination.'
+      );
+      expect(vFile.messages[2].reason).toBe(
+        'Replace "this article" with descriptive link text that details the destination.'
+      );
+      expect(vFile.messages[3].reason).toBe(
+        'Replace "this blog post" with descriptive link text that details the destination.'
+      );
+      expect(vFile.messages[4].reason).toBe(
+        'Replace "the Mapbox blog post" with descriptive link text that details the destination.'
+      );
+    });
+  });
 });
