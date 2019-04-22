@@ -75,6 +75,22 @@ describe('remark-lint-link-text', () => {
     });
   });
 
+  test('the...documentation should pass', () => {
+    const lint = processMarkdown(
+      dedent`
+      # Title
+
+      A good link: [the Mapbox Isochrone API documentation](https://docs.mapbox.com).
+    `
+    );
+
+    return lint.then(vFile => {
+      expect(vFile.messages.length).toBe(0);
+    });
+  });
+
+  //
+
   test('warns against banned link text, regex match', () => {
     const lint = processMarkdown(
       dedent`
