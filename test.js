@@ -89,8 +89,6 @@ describe('remark-lint-link-text', () => {
     });
   });
 
-  //
-
   test('warns against banned link text, regex match', () => {
     const lint = processMarkdown(
       dedent`
