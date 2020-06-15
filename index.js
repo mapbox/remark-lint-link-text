@@ -6,7 +6,7 @@ const banned = require('./banned.json');
 
 const starts = ['this', 'the'];
 const bannedRegex = banned.reduce((arr, b) => {
-  starts.forEach(s => {
+  starts.forEach((s) => {
     const trimmed = b.replace(s, '').trim();
     if (b.startsWith(s) && arr.indexOf(trimmed) === -1)
       arr.push(`${s}\\s(.*?)\\s${trimmed}\\b`);
@@ -16,7 +16,7 @@ const bannedRegex = banned.reduce((arr, b) => {
 
 function descriptiveLinkText(ast, file) {
   const textToNodes = {};
-  const aggregate = node => {
+  const aggregate = (node) => {
     const text = node.children.reduce((str, arr) => {
       if (arr.type == 'text') str += arr.value;
       return str;
@@ -33,14 +33,14 @@ function descriptiveLinkText(ast, file) {
 
   visit(ast, 'link', aggregate);
 
-  return Object.keys(textToNodes).map(txt => {
+  return Object.keys(textToNodes).map((txt) => {
     const nodes = textToNodes[txt];
     if (!nodes) return;
 
     // test regex
-    starts.forEach(start => {
+    starts.forEach((start) => {
       if (txt.toLowerCase().startsWith(start)) {
-        bannedRegex.forEach(reg => {
+        bannedRegex.forEach((reg) => {
           if (new RegExp(`${reg}`, 'i').test(txt)) {
             for (const node of nodes) {
               file.message(

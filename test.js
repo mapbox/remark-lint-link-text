@@ -6,9 +6,7 @@ const plugin = require('.');
 const banned = require('./banned.json');
 
 const processMarkdown = (markdown, opts) => {
-  return remark()
-    .use(plugin, opts)
-    .process(markdown);
+  return remark().use(plugin, opts).process(markdown);
 };
 
 describe('banned.json', () => {
@@ -17,7 +15,7 @@ describe('banned.json', () => {
     expect(banned.length).toBeGreaterThan(0);
   });
 
-  banned.forEach(phrase => {
+  banned.forEach((phrase) => {
     test(`"${phrase}" is a string`, () => {
       expect(typeof phrase).toBe('string');
     });
@@ -34,7 +32,7 @@ describe('remark-lint-link-text', () => {
 
       No URLs in here.
     `);
-    return lint.then(vFile => {
+    return lint.then((vFile) => {
       expect(vFile.messages.length).toBe(0);
     });
   });
@@ -50,7 +48,7 @@ describe('remark-lint-link-text', () => {
     `
     );
 
-    return lint.then(vFile => {
+    return lint.then((vFile) => {
       expect(vFile.messages.length).toBe(1);
       expect(vFile.messages[0].reason).toBe(
         'Replace "click here" with descriptive link text that details the destination.'
@@ -67,7 +65,7 @@ describe('remark-lint-link-text', () => {
     `
     );
 
-    return lint.then(vFile => {
+    return lint.then((vFile) => {
       expect(vFile.messages.length).toBe(1);
       expect(vFile.messages[0].reason).toBe(
         'Replace "Click here" with descriptive link text that details the destination.'
@@ -84,7 +82,7 @@ describe('remark-lint-link-text', () => {
     `
     );
 
-    return lint.then(vFile => {
+    return lint.then((vFile) => {
       expect(vFile.messages.length).toBe(0);
     });
   });
@@ -102,7 +100,7 @@ describe('remark-lint-link-text', () => {
     `
     );
 
-    return lint.then(vFile => {
+    return lint.then((vFile) => {
       expect(vFile.messages.length).toBe(5);
       expect(vFile.messages[0].reason).toBe(
         'Replace "this mapbox article" with descriptive link text that details the destination.'
