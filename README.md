@@ -9,13 +9,13 @@ A remark-lint plugin that warns against non-descriptive link text.
 
 The linter warns against:
 
-* click here
-* here
-* read more
-* this link
-* more here
-* this article
-* this [whatever words in between] article
+- click here
+- here
+- read more
+- this link
+- more here
+- this article
+- this [whatever words in between] article
 
 And [several others](banned.json).
 
@@ -57,14 +57,14 @@ Save banned link text in [banned.json](banned.json).
 ## Proper link text guidelines
 
 > When calling the user to action, use brief but meaningful link text that:
-> * provides some information when read out of context
-> * explains what the link offers
-> * doesn't talk about mechanics
-> * is not a verb phrase
+>
+> - provides some information when read out of context
+> - explains what the link offers
+> - doesn't talk about mechanics
+> - is not a verb phrase
 
-* https://www.w3.org/QA/Tips/noClickHere
-
+- https://www.w3.org/QA/Tips/noClickHere
 
 > Write links that make sense out of context. Use descriptive link text detailing the destination; not just “click here,” or other similar phrases.
 
-* http://accessibility.psu.edu/linktext/
+- http://accessibility.psu.edu/linktext/

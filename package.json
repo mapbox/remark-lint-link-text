@@ -5,38 +5,40 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "precommit": "lint-staged",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "pretest": "npm run lint"
   },
   "author": "Mapbox",
   "license": "MIT",
   "dependencies": {
-    "unified-lint-rule": "^1.0.4",
-    "unist-util-visit": "^1.4.1"
+    "unified-lint-rule": "^1.0.5",
+    "unist-util-visit": "^2.0.2"
   },
   "devDependencies": {
+    "@mapbox/prettier-config-docs": "^0.2.1",
     "dedent": "^0.7.0",
-    "eslint": "^5.16.0",
-    "eslint-plugin-node": "^8.0.1",
-    "husky": "^1.3.1",
-    "jest": "^24.9.0",
-    "lint-staged": "^8.2.1",
-    "prettier": "^1.19.1",
-    "remark": "^10.0.1"
+    "eslint": "^7.2.0",
+    "eslint-plugin-node": "^11.1.0",
+    "husky": "^4.2.5",
+    "jest": "^26.0.1",
+    "lint-staged": "^10.2.10",
+    "prettier": "^2.0.5",
+    "remark": "^12.0.0"
   },
-  "prettier": {
-    "singleQuote": true
-  },
+  "prettier": "@mapbox/prettier-config-docs",
   "lint-staged": {
     "*.js": [
       "eslint",
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ],
     "*.json": [
-      "prettier --write",
-      "git add"
+      "prettier --write"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "keywords": [
     "remark",
