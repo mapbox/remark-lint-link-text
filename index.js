@@ -9,7 +9,7 @@ const bannedRegex = banned.reduce((arr, b) => {
   starts.forEach((s) => {
     const trimmed = b.replace(s, '').trim();
     if (b.startsWith(s) && arr.indexOf(trimmed) === -1)
-      arr.push(`${s}\\s(.*?)\\s${trimmed}\\b`);
+      arr.push(`${s}\\s(.*?)\\s${trimmed}\\b$`);
   });
   return arr;
 }, []);

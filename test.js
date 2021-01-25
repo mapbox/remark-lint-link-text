@@ -87,6 +87,20 @@ describe('remark-lint-link-text', () => {
     });
   });
 
+  test('should pass', () => {
+    const lint = processMarkdown(
+      dedent`
+      ## Option 1: Choropleth
+      
+      In this option, we will create a choropleth visualization using data from [The Washington Post's "2ºC: Beyond the Limit" series about rising temperatures](https://github.com/washingtonpost/data-2C-beyond-the-limit-usa), which analyzes warming temperatures in the United States.
+    `
+    );
+
+    return lint.then((vFile) => {
+      expect(vFile.messages.length).toBe(0);
+    });
+  });
+
   test('warns against banned link text, regex match', () => {
     const lint = processMarkdown(
       dedent`
