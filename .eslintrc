@@ -1,16 +1,13 @@
 {
-  "extends": "eslint:recommended",
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "sourceType": "module",
+    "requireConfigFile": false
+  },
   "env": {
-    "node": true,
     "es6": true,
+    "node": true,
     "jest": true
   },
-  "plugins": [
-    "node"
-  ],
-  "rules": {
-    "strict": ["error", "global"],
-    "node/no-unsupported-features": ["error", {"version": 4}],
-    "node/no-missing-require": "error"
-  }
+  "extends": ["eslint:recommended", "prettier"]
 }

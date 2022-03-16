@@ -1,26 +1,24 @@
-'use strict';
+import { lintRule } from "unified-lint-rule";
+import { visit } from "unist-util-visit";
+import banned from "./banned.json";
 
-const rule = require('unified-lint-rule');
-const visit = require('unist-util-visit');
-const banned = require('./banned.json');
-
-const starts = ['this', 'the'];
+const starts = ["this", "the"];
 const bannedRegex = banned.reduce((arr, b) => {
   starts.forEach((s) => {
-    const trimmed = b.replace(s, '').trim();
+    const trimmed = b.replace(s, "").trim();
     if (b.startsWith(s) && arr.indexOf(trimmed) === -1)
       arr.push(`${s}\\s(.*?)\\s${trimmed}\\b$`);
   });
   return arr;
 }, []);
 
-function descriptiveLinkText(ast, file) {
+const checkLinkText = lintRule("remark-lint:link-text", (tree, file) => {
   const textToNodes = {};
   const aggregate = (node) => {
     const text = node.children.reduce((str, arr) => {
-      if (arr.type == 'text') str += arr.value;
+      if (arr.type == "text") str += arr.value;
       return str;
-    }, '');
+    }, "");
 
     if (!text) return;
 
@@ -31,7 +29,7 @@ function descriptiveLinkText(ast, file) {
     textToNodes[text].push(node);
   };
 
-  visit(ast, 'link', aggregate);
+  visit(tree, "link", aggregate);
 
   return Object.keys(textToNodes).map((txt) => {
     const nodes = textToNodes[txt];
@@ -41,7 +39,7 @@ function descriptiveLinkText(ast, file) {
     starts.forEach((start) => {
       if (txt.toLowerCase().startsWith(start)) {
         bannedRegex.forEach((reg) => {
-          if (new RegExp(`${reg}`, 'i').test(txt)) {
+          if (new RegExp(`${reg}`, "i").test(txt)) {
             for (const node of nodes) {
               file.message(
                 `Replace "${txt}" with descriptive link text that details the destination.`,
@@ -54,7 +52,7 @@ function descriptiveLinkText(ast, file) {
     });
 
     // test banned words
-    if (banned.indexOf(txt.toLowerCase()) > -1) {
+    if (banned.includes(txt.toLowerCase())) {
       for (const node of nodes) {
         file.message(
           `Replace "${txt}" with descriptive link text that details the destination.`,
@@ -63,6 +61,6 @@ function descriptiveLinkText(ast, file) {
       }
     }
   });
-}
+});
 
-module.exports = rule('remark-lint:link-text', descriptiveLinkText);
+export default checkLinkText;

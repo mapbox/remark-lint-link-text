@@ -1,23 +1,23 @@
-'use strict';
+"use strict";
 
-const remark = require('remark');
-const dedent = require('dedent');
-const plugin = require('.');
-const banned = require('./banned.json');
+import { remark } from "remark";
+import dedent from "dedent";
+import plugin from ".";
+import banned from "./banned.json";
 
 const processMarkdown = (markdown, opts) => {
   return remark().use(plugin, opts).process(markdown);
 };
 
-describe('banned.json', () => {
+describe("banned.json", () => {
   test(`banned.json is an array`, () => {
-    expect(typeof banned).toBe('object');
+    expect(typeof banned).toBe("object");
     expect(banned.length).toBeGreaterThan(0);
   });
 
   banned.forEach((phrase) => {
     test(`"${phrase}" is a string`, () => {
-      expect(typeof phrase).toBe('string');
+      expect(typeof phrase).toBe("string");
     });
     test(`"${phrase}" is lowercase`, () => {
       expect(phrase.toLowerCase()).toEqual(phrase);
@@ -25,8 +25,8 @@ describe('banned.json', () => {
   });
 });
 
-describe('remark-lint-link-text', () => {
-  test('no errors when no links present', () => {
+describe("remark-lint-link-text", () => {
+  test("no errors when no links present", () => {
     const lint = processMarkdown(dedent`
       # Title
 
@@ -37,7 +37,7 @@ describe('remark-lint-link-text', () => {
     });
   });
 
-  test('warns against banned link text', () => {
+  test("warns against banned link text", () => {
     const lint = processMarkdown(
       dedent`
       # Title
@@ -56,7 +56,7 @@ describe('remark-lint-link-text', () => {
     });
   });
 
-  test('warns against banned link text, case insensitve', () => {
+  test("warns against banned link text, case insensitve", () => {
     const lint = processMarkdown(
       dedent`
       # Title
@@ -73,7 +73,7 @@ describe('remark-lint-link-text', () => {
     });
   });
 
-  test('the...documentation should pass', () => {
+  test("the...documentation should pass", () => {
     const lint = processMarkdown(
       dedent`
       # Title
@@ -87,7 +87,7 @@ describe('remark-lint-link-text', () => {
     });
   });
 
-  test('should pass', () => {
+  test("should pass", () => {
     const lint = processMarkdown(
       dedent`
       ## Option 1: Choropleth
@@ -101,7 +101,7 @@ describe('remark-lint-link-text', () => {
     });
   });
 
-  test('warns against banned link text, regex match', () => {
+  test("warns against banned link text, regex match", () => {
     const lint = processMarkdown(
       dedent`
       # Title
