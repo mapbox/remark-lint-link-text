@@ -1,6 +1,6 @@
 {
   "name": "@mapbox/remark-lint-link-text",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "description": "A remark-lint plugin that warns against non-descriptive link text.",
   "main": "index.js",
   "scripts": {
@@ -56,5 +56,8 @@
   "engines": {
     "node": ">=20",
     "npm": ">=10"
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
